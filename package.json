@@ -1,0 +1,16 @@
+{
+  "name": "cl-management-bot",
+  "version": "1.0.0",
+  "description": "A Webext Teams bot and an API used to manage group spaces during the workshop",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "serverless-http": "^1.8.0"
+  }
+}
