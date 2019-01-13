@@ -12,7 +12,11 @@
   "dependencies": {
     "aws-sdk": "^2.386.0",
     "body-parser": "^1.18.3",
+    "ciscospark": "^1.32.23",
     "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "nocache": "^2.0.0",
+    "request-promise": "^4.2.2",
     "serverless-http": "^1.8.0"
   },
   "devDependencies": {

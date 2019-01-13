@@ -2,24 +2,30 @@ service: cl-management-bot
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs8.10
   stage: dev
   region: us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+      Resource: "*"
 
 functions:
   app:
     handler: index.handler
     events:
-      - http: ANY /
-      - http: 'ANY {proxy+}'
+      - http: ANY /api/v1/
+      - http: 'ANY /api/v1/{proxy+}'
+    environment:
+      BOT_ID: ${ssm:cl2019_bot_id}
+      BOT_TOKEN: ${ssm:cl2019_bot_token}
+      CISCOSPARK_ACCESS_TOKEN: ${ssm:cl2019_bot_token}
+      JWT_ISS: ${ssm:cl2019_jwt_id}
+      JWT_KEY: ${ssm:cl2019_jwt_secret}
 
 plugins:
   - serverless-offline
-  - serverless-domain-manager
-
-custom:
-  customDomain:
-    domainName: api.guest.training
-    basePath: '/v1'
-    stage: ${self:provider.stage}
-    createRoute53Record: true
