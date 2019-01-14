@@ -14,12 +14,12 @@ app.use(nocache());
 const bot_id = process.env.BOT_ID;
 const bot_token = process.env.BOT_TOKEN;
 
-app.get('/api/v1/demoRoom', demoRoom.get);
-app.post('/api/v1/demoRoom', demoRoom.addMember);
+app.get('/v1/demoRoom', demoRoom.get);
+app.post('/v1/demoRoom', demoRoom.addMember);
 
-app.get('/api/v1/jwtToken/:sub', jwtIssuer.getJwtForSub);
-app.post('/api/v1/jwtToken', jwtIssuer.createJwtForSubName);
+app.get('/v1/jwtToken/:sub', jwtIssuer.getJwtForSub);
+app.post('/v1/jwtToken', jwtIssuer.createJwtForSubName);
 
-app.post('/api/v1/guest', guest.createAndJoin);
+app.post('/v1/guest', guest.createAndJoin);
 
 module.exports.handler = serverless(app);

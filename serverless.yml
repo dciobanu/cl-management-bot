@@ -18,8 +18,8 @@ functions:
   app:
     handler: index.handler
     events:
-      - http: ANY /api/v1/
-      - http: 'ANY /api/v1/{proxy+}'
+      - http: ANY /v1/
+      - http: 'ANY /v1/{proxy+}'
     environment:
       BOT_ID: ${ssm:cl2019_bot_id}
       BOT_TOKEN: ${ssm:cl2019_bot_token}
