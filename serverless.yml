@@ -5,6 +5,7 @@ provider:
   runtime: nodejs8.10
   stage: dev
   region: us-east-1
+  timeout: 30
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -18,8 +19,14 @@ functions:
   app:
     handler: index.handler
     events:
-      - http: ANY /v1/
-      - http: 'ANY /v1/{proxy+}'
+      - http:
+         path: /v1/
+         method: ANY
+         cors: true
+      - http:
+         path: /v1/{proxy+}
+         method: ANY
+         cors: true
     environment:
       BOT_ID: ${ssm:cl2019_bot_id}
       BOT_TOKEN: ${ssm:cl2019_bot_token}

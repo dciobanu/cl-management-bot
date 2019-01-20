@@ -38,15 +38,24 @@ async function createAndJoin(req, res) {
         json: true
       });
 
-    var membership = await rp({
+    var membership;
+    try {
+      membership = await rp({
         method: 'POST',
         uri: 'https://api.ciscospark.com/v1/memberships',
         headers: {Authorization: 'Bearer ' + bot_token},
         body: {roomId: roomId, personId: personDetails.id},
         json: true
       })
-
-    res.send(membership);
+    } catch(e) {
+      if (e.statusCode != 409) throw e; // 409 means the user is already in the space
+    }
+    
+    res.send({
+      userId: personDetails.id,
+      roomId: roomId,
+      token: tokenJwt
+    });
   } catch (e) {
     res.status(e.statusCode).send(e.error);
   }
