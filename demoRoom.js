@@ -61,8 +61,12 @@ async function addMember(req, res) {
 
       res.status(204).end();
     } catch (e) {
-      console.error("Error", JSON.stringify(e));
-      res.status(502).end(JSON.stringify(e));
+      if (e.name == 'Conflict') {
+        res.status(409).end();
+      } else {
+        console.error("Error", JSON.stringify(e));
+        res.status(502).end(JSON.stringify(e));
+      }
     }
   }
 };
